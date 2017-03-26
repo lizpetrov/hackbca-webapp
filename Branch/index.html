@@ -110,96 +110,50 @@
           	<div class="row mt">
           		<div class="col-lg-12 showback">
                     <h3>Emotions over Time</h3>
-          		    <canvas id="myChart" width="400" height="400"></canvas>
+          		    <canvas id="myChart" width="400" height="200"></canvas>
           		</div>
           	</div>
 			
               
               <script>
-                  
-                    var angers = [];
-                    var disgusts = [];
-                    var fears = [];
-                    var joys = [];
-                    var sadnesses = [];
-
-                      var config = {
-                        apiKey: "AIzaSyB20lzTP0XdsljXRfxQfiAtnbCcvd04vSM",
-                        authDomain: "hackbca-app.firebaseapp.com",
-                        databaseURL: "https://hackbca-app.firebaseio.com",
-                        storageBucket: "hackbca-app.appspot.com",
-                        messagingSenderId: "744594729315"
-                      };
-
-                      firebase.initializeApp(config);
-
-                      var recentPostsRef = firebase.database().ref('posts');
-
-                      var fetchPosts = function(postsRef) {
-                        postsRef.on('child_added', function(data) {
-                    //      recentPostsSection.insertBefore(
-                    //          createPostElement(data.key, data.val().title, data.val().body, data.val().date, data.val().anger, data.val().disgust, data.val().fear, data.val().joy, data.val().sadness),
-                    //          recentPostsSection.firstChild);
-                                angers.push(data.val().anger*100);
-                            console.log("HERE " + data.val().anger*100);
-                                fears.push(data.val().fear*100);
-                                disgusts.push(data.val().disgust*100);
-                                joys.push(data.val().joy*100);
-                                sadnesses.push(data.val().sadness*100);
-                        });
-                          
-                          
-                           var labels = [];
-                  
-                  for(var i = 1; i <= joys.length; i++)
-                      {
-                          labels.push(i);
-                      }
-                  console.log(labels);
-                  console.log(joys + " " + angers.length + " " + labels.length);
-                  
-                    var ctx = document.getElementById("myChart");
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    type: 'line',
-                                    label: 'Joy',
-                                    data: joys,
-                                },
-                                {
-                                    type: 'line',
-                                    label: 'Sadness',
-                                    data: sadnesses,
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [1, 2, 3, 4, 5, 6],
+                        datasets: [{
+                            label: 'Sadness',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
                                 }
-                            ]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
-                                }]
-                            }
+                            }]
                         }
-                    });
-
-                          
-                          
-                          
-
-                        }
-
-                        fetchPosts(recentPostsRef)
-                        
-                        
-
-                 
-                  
-              </script>
+                    }
+                });
+            </script>
               
               
               
